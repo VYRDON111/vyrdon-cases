@@ -1,69 +1,239 @@
-# VYRDON Cases
+# VYRDON
 
-This repository defines the VYRDON case layer.
-
-It exists to make real-world applications of the RootPass methodology visible, testable, and challengeable.
-
-RootPass asks not whether a transaction was said to be verified, but whether the verification itself can pass.
+Validation-Gated Execution System
 
 ---
 
-## What This Repo Proves
+## 1. Definition
 
-Methodology without cases is theory. Cases prove the methodology works on real data — and document where it fails.
+VYRDON is a constraint-driven execution system that separates:
 
-Each case applies the four-pillar law to a real-world transaction scenario and produces a RootPass decision: PASS, NO_PASS, or HOLD.
+Execution → what runs  
+Acceptance → what is considered valid  
+
+An operation may execute, but it is only accepted if it satisfies deterministic validation conditions.
+
+If any condition fails:
+
+ACCEPTANCE = FALSE
+
+No partial acceptance exists.  
+Execution without validation is treated as non-valid.
+
+---
+
+## 2. Core Principle
+
+Execution is not truth.
+
+Truth is produced only through validation convergence.
+
+---
+
+## 3. System Architecture (Constraint Graph)
+
+VYRDON is not a traditional layered system.  
+It operates as a validation-anchored execution graph.
 
 ```
-TRUE ROOT  = PASS
-FALSE ROOT = NO_PASS
-MISSING ROOT = HOLD
+[ AUTHORITY ]
+       ↓
+[ VALIDATION GATE ]
+       ↓
+[ EXECUTION ]
+       ↓
+[ EVIDENCE ]
+       ↓
+[ STATE COMMIT ]
+       ↓
+[ VERIFICATION ]
+       ↓
+[ ACCEPTANCE ]
 ```
 
-No root, no pass.
+---
+
+## 4. Node Properties
+
+Each node:
+
+- cannot self-validate  
+- cannot override validation  
+- cannot produce acceptance independently  
+
+Acceptance is a **system-level result**, not a node-level decision.
 
 ---
 
-## Repository Structure
+## 5. Validation Model (Deterministic Constraint Engine)
 
-| Path | What it contains |
-|---|---|
-| `docs/` | Case scope, selection policy, disclaimers, source rules, template guide |
-| `markets/` | Market-specific analysis (banking, payments, exchanges, marketplaces, escrow, treasury, remittance) |
-| `cases/` | Cases organized by market, claim type, root gap, contradiction, and live court |
-| `patterns/` | Recurring failure patterns across markets |
-| `registry/` | Case, market, claim, contradiction, and institution indexes |
-| `tests/` | Case consistency and source sufficiency checklists |
-| `failures/` | Bad case selection, weak source cases, overclaim risks |
-| `open-review/` | Submit, challenge, or request cases |
-| `sources/` | Source library and verification |
+Validation is enforced as a logical constraint:
 
----
+```
+ACCEPT = ∧ (Authority ∧ Executor ∧ Evidence ∧ State ∧ Integrity)
+```
 
-## Markets Covered
+Failure condition:
 
-| Market | Key Patterns |
-|---|---|
-| Banking | Wire not received, settlement mismatch, authority conflict |
-| Payments | Refund dispute, payout delay, merchant settlement gap |
-| Exchanges | Deposit not credited, withdrawal not confirmed, balance contradiction |
-| Marketplaces | Delivery dispute, escrow release conflict, multi-party contradiction |
-| Escrow | Release without proof, premature release, timeout dispute |
-| Treasury | Reconciliation failure, end-of-day mismatch, multi-currency gap |
-| Remittance | Cross-border wire uncertainty, status contradiction, authority gap |
+```
+¬(ANY CONDITION) → ACCEPT = FALSE
+```
 
 ---
 
-## How to Submit a Case
+## 6. Validation Collapse
 
-See `open-review/SUBMIT_A_CASE.md`.
+Acceptance occurs only when all validation dimensions converge into a consistent truth state.
 
-## How to Challenge a Case
+If convergence fails:
 
-See `open-review/CHALLENGE_A_CASE.md`.
+```
+SYSTEM OUTPUT = NULL
+```
+
+Execution is ignored.
 
 ---
 
-## License
+## 7. Execution Physics
 
-Apache 2.0 — see [LICENSE](LICENSE)
+Execution is treated as an intermediate state.
+
+```
+Intent → Constraint Mapping → Execution → Evidence → State → Validation → ACCEPT / NULL
+```
+
+---
+
+## 8. Time Behavior
+
+VYRDON enforces termination:
+
+Every operation must resolve into:
+
+- ACCEPT  
+- NULL (non-valid)
+
+Rejected patterns:
+
+- infinite retry loops  
+- unresolved states  
+- eventual consistency acceptance  
+
+---
+
+## 9. Language Law (Multi-Layer System)
+
+VYRDON enforces strict separation between language roles.
+
+| Layer      | Language         | Role |
+|------------|-----------------|------|
+| Surface    | LEET / symbolic | intent locking |
+| Canonical  | structured map  | normalization |
+| Build      | Python          | logic construction |
+| Verify     | Rust / Python   | validation |
+| Runtime    | Rust / Go / Node| execution |
+
+---
+
+## 10. Hard Rule
+
+```
+R00T.F4L53 → P455.F4L53
+```
+
+If root authority is invalid, acceptance is impossible.
+
+---
+
+## 11. Enforcement Model
+
+Validation is applied:
+
+- at runtime  
+- before acceptance  
+- after execution  
+- without external interpretation  
+
+Ignored:
+
+- UI signals  
+- admin overrides  
+- assumed trust  
+
+---
+
+## 12. Evidence and Ledger
+
+Each operation generates:
+
+- execution context  
+- validation results  
+- timestamp  
+- integrity hash  
+
+Stored as:
+
+- append-only records  
+- verifiable audit trail  
+- replayable sequence  
+
+---
+
+## 13. System Layers
+
+| Component   | Role |
+|------------|------|
+| VYRDON     | validation logic |
+| VYRDX      | runtime execution |
+| Consolab   | evidence + certification |
+| Vyrden     | analysis |
+| VXStation  | monitoring |
+
+---
+
+## 14. Use Cases
+
+- financial systems  
+- escrow and settlement  
+- API validation layers  
+- CI/CD enforcement  
+- audit-critical systems  
+
+---
+
+## 15. Boundary Definition
+
+VYRDON does not replace execution systems.
+
+It defines:
+
+what is allowed to be accepted as true
+
+---
+
+## 16. Status
+
+Active development.  
+Constraint model defined.  
+Runtime under construction.
+
+---
+
+## 17. Repository
+
+https://github.com/teee79A/vyrdon
+
+---
+
+## 18. License
+
+Apache License 2.0  
+Commercial licensing available separately.
+
+---
+
+## 19. Author
+
+Thaer Bataineh  
+System builder focused on validation-driven execution and constraint-based runtimes.
