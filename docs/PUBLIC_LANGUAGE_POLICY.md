@@ -62,11 +62,13 @@ We do not lead with internal runtime names anymore.
 
 | Old Internal Name | New Public Name | Use In Public Repos | Never Use In Public Headlines |
 |---|---|---|---|
-| VYRDX | RootPass engine / proof gate | Reference only when describing internal architecture | Never as product identity |
-| VXStation | Review surface / operator review | Describe as "review surface" | Never as product name |
-| KITTY | Internal build environment | Do not reference publicly | Never |
-| ASUS | Authority environment | Do not reference publicly | Never |
-| ConsoleLab | Discussion and evidence review surface | Describe function, not name | Never as product name |
+| ASUS | ASUSX / authority plane | Reference only as "ASUSX" or "authority plane" | Never use "ASUS" |
+| DELL | Execution node | "Execution node" or "runtime node" | Never use "DELL" |
+| KITTY | Terminal layer | Do not reference publicly | Never |
+| VXStation | Observer layer | "Observer layer" or "read-only observer" (if retained) | Never as product name |
+| DEBLOOD | Local intelligence runtime | Do not reference publicly | Never |
+| node-blood | Gate reference service | Do not reference publicly | Never |
+| ConsoleLab | Control room / review surface | Describe function, not name | Never as product name |
 | control-room | Operating review surface | Describe function, not name | Never as product name |
 | runtime | Execution system | "Execution system" or "proof engine" | Never as standalone identity |
 | seal | Law / non-negotiable constraints | "Sealed law" or "constraint" | Never as badge |
