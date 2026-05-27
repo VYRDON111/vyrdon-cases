@@ -57,6 +57,34 @@ Within each outcome class:
 
 These cases prove that the doctrine **produces the right verdict** on realistic inputs. They do not prove that any specific institution applies the doctrine correctly today, and they do not certify any real-world transaction. The cases are reproducible: anyone reading the surface signal, root failure, and Root map should arrive at the same decision the case records.
 
+## Doctrine signal: fraud through broken route, not stolen key
+
+A pattern that runs through CASE-005 through CASE-010: **fraud and loss do not require a stolen key**. They more often happen through a **broken route** — a path from surface to root that fails one of the five Route Rule proofs (`vyrdon-mechanism/mechanism/ROUTE_LAW.md` §5: authorized route, valid scope, custody seal, evidence path, authority/root proof) while a valid credential is still in possession of the right party.
+
+The Window Principle (`mechanism/ROUTE_LAW.md` §2) names this: *a key is not enough if the route is broken; an attacker does not need the key to the house if the window is open*.
+
+Case-by-case applications:
+
+| Case | The "valid key" present | The broken route |
+|---|---|---|
+| CASE-005 | Platform's `COMPLETED` status (valid surface label) | Reconciliation timing — the return file is not pulled before the platform marks the payout complete |
+| CASE-006 | Merchant's signed usage logs and customer's signed travel records (both valid) | No independent identity anchor — the gate cannot rule one custody-sealed source over the other |
+| CASE-007 | The system's positive-event log (valid for everything that happened) | No negative-state seal — the system structurally cannot prove that nothing happened |
+| CASE-008 | The authenticator token (valid for one transfer) | Session lifecycle and per-event authority — the same token is reused for a second transfer the human did not authorize |
+| CASE-009 | On-chain wallet movements (valid as raw blockchain data) | Identity binding and pre-loss control — the wallet is not custody-sealed to a legal identity, so the data is not legal evidence |
+| CASE-010 | Loss event (valid as a real incident) | Policy-trigger match — the loss type does not match the policy's damage definition |
+
+The doctrine signal across the case set: **the gate must seal the route, not only check the key**. The Route Rule's five proofs are the route's seals; Code Hash Seal (`mechanism/CODE_HASH_SEAL.md`) extends the principle into the build layer so that even the **verifier** that checks routes is itself sealed against substitution.
+
+## Two-layer protection across the case set
+
+| Sealing layer | What is sealed in these cases | Root Language artifact |
+|---|---|---|
+| **Surface seal** (the door) | The five Route Rule proofs at intake: authorized route, valid scope, custody seal, evidence path, authority/root proof. CASE-005 through CASE-010 all turn on one or more of these. | `mechanism/ROUTE_LAW.md` |
+| **Build seal** (the bricks) | The code that runs the verifiers, validators, schemas, decision engines, and gate compositions. None of the cases turns on this layer directly, because the cases describe failures at the gate, not failures of the gate. A case in which the verifier itself was substituted would turn on Code Hash Seal. | `mechanism/CODE_HASH_SEAL.md` |
+
+The cases in this directory are the **surface-seal exercise**. They establish that the doctrine produces correct verdicts when the verifier is intact. The build-seal exercise (a case in which the verifier itself is the failure point) is left as a follow-up — naming the failure class is enough for the current PR series.
+
 ## Authoring style
 
 If you add a new populated case, follow the 9-section structure exactly. Cases that omit a section, mix in weak language (see the forbidden list in `vyrdon-methodology/docs/ROOT_LANGUAGE.md` §6), or relabel verdicts to fit a desired outcome do not belong in this directory.
