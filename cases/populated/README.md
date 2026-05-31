@@ -112,7 +112,7 @@ Field mapping between the two forms (when both are present):
 | `VALID = TRUE` | `evidence_valid = TRUE` | Identical |
 | `VALID = FALSE` | `evidence_valid = FALSE` | Identical |
 | `VALID = MIXED` | `evidence_valid = FALSE` | MIXED means not fully TRUE, so fails the binary pass/fail check |
-| `VALID = MISSING` (legacy CASE-002 only) | `evidence_valid = MISSING` (legacy CASE-002 only) | Legacy transaction-decision form used a ternary `evidence_valid` marker for the recipient-credit-not-yet-received state. New cases (CASE-004 onward) collapse MISSING into `evidence_valid = FALSE` per the binary rule below. |
+| `VALID = MISSING` *(hypothetical — CASE-002 has no 9-section §5; row shown for completeness only)* | `evidence_valid = MISSING` (actual; CASE-002 line 84) | CASE-002 is entirely in the older 10-section transaction-decision form and does not carry a 9-section §5 Root Map. The left column is hypothetical: it is what the 9-section state **would** be if CASE-002 were migrated. The right column is the actual ternary `evidence_valid = MISSING` marker that exists today. New cases (CASE-004 onward) do not use this marker; they collapse MISSING into `evidence_valid = FALSE` per the binary rule. |
 | `CERTIFIED = TRUE` / `FALSE` / `N/A` | `certified_valid = TRUE` / `FALSE` / `FALSE` | `N/A` collapses to FALSE in the binary check |
 | `Contradiction = TRUE` / `FALSE` | `contradiction = TRUE` / `FALSE` | Identical |
 
