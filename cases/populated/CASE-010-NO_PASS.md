@@ -46,10 +46,10 @@ In the ransomware-denial scenario:
 - `loss_event_verified` = **TRUE** — the encryption event and business disruption are evidentially clear
 - `policy_trigger_matched_to_loss_type` = **FALSE** — the policy covers, say, "unauthorized data exfiltration" or "system reconstruction costs," but the actual loss is "operational downtime from encryption-only event"; the named perils do not match
 - `damage_definition_matched_under_policy_language` = **FALSE** — the policy's definition of covered damage explicitly excludes the loss category that occurred (encryption-only, ransom payment, third-party recovery cost)
-- `formal_claim_notice_within_window` = **FALSE** or **MISSING** — the notification was sent through the wrong channel, after the policy's notification deadline, or without the required documentation set
+- `formal_claim_notice_within_window` = **FALSE** — a notice was sent, but through the wrong channel, after the policy's notification deadline, and without the required documentation set; an actively non-compliant notice is FALSE (the notice exists and is wrong), not MISSING (the notice never existed)
 - `coverage_artifact_archive_written` = **MISSING** — the insured organization did not produce a coverage-readiness artifact at the time of the incident that the carrier could ingest as a single sealed object
 
-Two of the five required roots are **FALSE** (definitive mismatches, not gaps). This is **False Root**, not Missing Root. The doctrine `FALSE ROOT → NO_PASS` applies.
+Three of the five required roots are **FALSE** (definitive mismatches, not gaps): policy-trigger match, damage-definition match, and formal-claim-notice compliance. One is **MISSING** (coverage-artifact archive). The doctrine `FALSE ROOT → NO_PASS` applies because FALSE outranks MISSING when both are present.
 
 ---
 
@@ -156,7 +156,7 @@ DECISION = NO_PASS
 DECISION_CODE = DEC-NOPASS-FALSE_ROOT
 ```
 
-**Reasoning.** This is False Root: two required roots (policy_trigger_match, damage_definition_match) are definitively FALSE under the policy's own language, and the portal status contradicts those roots. Per doctrine, FALSE ROOT → NO_PASS, and contradiction blocks PASS absolutely. The verdict is not HOLD because the policy's language is itself a sealed artifact (the policy document) against which the loss type can be compared — the gap is not "we have not yet observed" but "we have observed and the answer is no."
+**Reasoning.** This is False Root: three required roots (policy_trigger_match, damage_definition_match, formal_claim_notice_within_window) are definitively FALSE under the policy's own language and the carrier's notification rule, and the portal status contradicts those roots. Per doctrine, FALSE ROOT → NO_PASS, and contradiction blocks PASS absolutely. The verdict is not HOLD because the policy's language is itself a sealed artifact (the policy document) against which the loss type can be compared — the gap is not "we have not yet observed" but "we have observed and the answer is no."
 
 ---
 

@@ -156,7 +156,7 @@ DECISION = HOLD
 DECISION_CODE = DEC-HOLD-MISSING_ROOT
 ```
 
-**Reasoning.** Three required roots (no_execution_seal, no_trade_seal, archive_final) are **MISSING**, not FALSE. The doctrine `MISSING ROOT → HOLD` applies. The verdict is not NO_PASS because there is no contradicting evidence; it is HOLD because the system cannot produce the seals the claim requires. NO_PASS would be reached only if a positive execution record were found (in which case the negative claim is contradicted and authority falls to the positive record).
+**Reasoning.** Five required roots (request_trace, route_attempt, no_execution_seal, no_trade_seal, archive_final) are **MISSING**, not FALSE. The doctrine `MISSING ROOT → HOLD` applies. The verdict is not NO_PASS because there is no contradicting evidence; it is HOLD because the system cannot produce the seals the claim requires. NO_PASS would be reached only if a positive execution record were found (in which case the negative claim is contradicted and authority falls to the positive record).
 
 ---
 

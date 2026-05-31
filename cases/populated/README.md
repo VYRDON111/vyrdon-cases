@@ -71,7 +71,7 @@ These cases prove that the doctrine **produces the right verdict** on realistic 
 
 A pattern that runs through CASE-005 through CASE-010: **fraud and loss do not require a stolen key**. They more often happen through a **broken route** — a path from surface to root that fails one of the five Route Rule proofs (`vyrdon-mechanism/mechanism/ROUTE_LAW.md` §5: authorized route, valid scope, custody seal, evidence path, authority/root proof) while a valid credential is still in possession of the right party.
 
-The Window Principle (`mechanism/ROUTE_LAW.md` §2) names this: *a key is not enough if the route is broken; an attacker does not need the key to the house if the window is open*.
+The Window Principle (`vyrdon-mechanism/mechanism/ROUTE_LAW.md` §2) names this: *a key is not enough if the route is broken; an attacker does not need the key to the house if the window is open*.
 
 Case-by-case applications:
 
@@ -84,14 +84,14 @@ Case-by-case applications:
 | CASE-009 | On-chain wallet movements (valid as raw blockchain data) | Identity binding and pre-loss control — the wallet is not custody-sealed to a legal identity, so the data is not legal evidence |
 | CASE-010 | Loss event (valid as a real incident) | Policy-trigger match — the loss type does not match the policy's damage definition |
 
-The doctrine signal across the case set: **the gate must seal the route, not only check the key**. The Route Rule's five proofs are the route's seals; Code Hash Seal (`mechanism/CODE_HASH_SEAL.md`) extends the principle into the build layer so that even the **verifier** that checks routes is itself sealed against substitution.
+The doctrine signal across the case set: **the gate must seal the route, not only check the key**. The Route Rule's five proofs are the route's seals; Code Hash Seal (`vyrdon-mechanism/mechanism/CODE_HASH_SEAL.md`) extends the principle into the build layer so that even the **verifier** that checks routes is itself sealed against substitution.
 
 ## Two-layer protection across the case set
 
 | Sealing layer | What is sealed in these cases | Root Language artifact |
 |---|---|---|
-| **Surface seal** (the door) | The five Route Rule proofs at intake: authorized route, valid scope, custody seal, evidence path, authority/root proof. CASE-005 through CASE-010 all turn on one or more of these. | `mechanism/ROUTE_LAW.md` |
-| **Build seal** (the bricks) | The code that runs the verifiers, validators, schemas, decision engines, and gate compositions. None of the cases turns on this layer directly, because the cases describe failures at the gate, not failures of the gate. A case in which the verifier itself was substituted would turn on Code Hash Seal. | `mechanism/CODE_HASH_SEAL.md` |
+| **Surface seal** (the door) | The five Route Rule proofs at intake: authorized route, valid scope, custody seal, evidence path, authority/root proof. CASE-005 through CASE-010 all turn on one or more of these. | `vyrdon-mechanism/mechanism/ROUTE_LAW.md` |
+| **Build seal** (the bricks) | The code that runs the verifiers, validators, schemas, decision engines, and gate compositions. None of the cases turns on this layer directly, because the cases describe failures at the gate, not failures of the gate. A case in which the verifier itself was substituted would turn on Code Hash Seal. | `vyrdon-mechanism/mechanism/CODE_HASH_SEAL.md` |
 
 The cases in this directory are the **surface-seal exercise**. They establish that the doctrine produces correct verdicts when the verifier is intact. The build-seal exercise (a case in which the verifier itself is the failure point) is left as a follow-up — naming the failure class is enough for the current PR series.
 
@@ -100,6 +100,22 @@ The cases in this directory are the **surface-seal exercise**. They establish th
 If you add a new populated case, follow the 9-section structure exactly. Cases that omit a section, mix in weak language (see the forbidden list in `vyrdon-methodology/docs/ROOT_LANGUAGE.md` §6), or relabel verdicts to fit a desired outcome do not belong in this directory.
 
 A Detailed Case Record (transaction-decision form) is **optional**. Include it only when the case has a specific anonymized scenario with concrete provided/missing evidence that the transaction-decision form can render. Doctrine-form cases (cases that name a failure class without binding to specific anonymized fields) use the 9-section summary alone. When a Detailed Case Record is present, its `root_valid` and `gate_valid` fields must agree with §5's `ROOT` and `GATE` evaluations; a divergence is a doctrine inconsistency and must be repaired before merge.
+
+Field mapping between the two forms (when both are present):
+
+| 9-section §5 (Root Map) | Detailed Case Record (RootPass Decision) | Rule |
+|---|---|---|
+| `ROOT = TRUE` | `root_valid = TRUE` | Identical |
+| `ROOT = FALSE` | `root_valid = FALSE` | Identical |
+| `ROOT = MISSING` | `root_valid = FALSE` | MISSING fails the binary `root_valid` check |
+| `GATE = TRUE` / `FALSE` / `N/A` | `gate_valid = TRUE` / `FALSE` / `FALSE` | `N/A` collapses to FALSE in the binary check |
+| `VALID = TRUE` | `evidence_valid = TRUE` | Identical |
+| `VALID = FALSE` | `evidence_valid = FALSE` | Identical |
+| `VALID = MIXED` | `evidence_valid = FALSE` | MIXED means not fully TRUE, so fails the binary pass/fail check |
+| `CERTIFIED = TRUE` / `FALSE` / `N/A` | `certified_valid = TRUE` / `FALSE` / `FALSE` | `N/A` collapses to FALSE in the binary check |
+| `Contradiction = TRUE` / `FALSE` | `contradiction = TRUE` / `FALSE` | Identical |
+
+The 9-section form is richer (three states + N/A); the Detailed Case Record's RootPass Decision is binary by construction. Information is lost when collapsing 9-section → Detailed but never the other way.
 
 The math and code blocks in section 5 must be defensive governance logic only:
 - The "What systems do today (insufficient)" block shows the gap, not the attack
