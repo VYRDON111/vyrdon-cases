@@ -12,7 +12,7 @@ All cases authored from CASE-004 onward use the **9-section doctrine form**. Use
 2. **Surface Signal** — what the surface looks like (UI status, portal label, dashboard claim)
 3. **Root Failure** — which root is FALSE / MISSING / contradicted, and why
 4. **Missing Safeguard** — which doctrine-level control should have existed at the gate (cross-link to `vyrdon-mechanism/mechanism/MISSING_SAFEGUARDS.md`)
-5. **VYRDON Root Map** — full four-pillar table (ROOT / GATE / VALID / CERTIFIED + Contradiction) with evaluation per pillar
+5. **VYRDON Root Map** — full four-pillar table (ROOT / GATE / VALID / CERTIFIED + Contradiction) with evaluation per pillar. For doctrine-form cases without an appended Detailed Case Record (CASE-007 to CASE-010), §5 additionally carries `### Math` and `### Code` subsections — the math subsection shows the four-pillar arithmetic on the case's inputs, and the code subsection shows three blocks (insufficient gate code as written, the missing-safeguard code that should have been there, and the corrected right-control code) framed as **defensive governance logic only** (no exploit steps, no attack workflow). Cases that carry a Detailed Case Record (CASE-004 to CASE-006) may omit the math+code subsections because the appended Detailed Case Record covers the same illustrative ground in transaction-decision form.
 6. **Decision** — verdict (PASS / HOLD / NO_PASS), decision code (DEC-PASS / DEC-HOLD-MISSING_ROOT / DEC-NOPASS-FALSE_ROOT / DEC-NOPASS-CONTRADICTION), and reasoning
 7. **Output Packet** — the audit-bound output record the system produces (verdict, code, blocking roots, action)
 8. **System Boundary** — what this case does and does not claim

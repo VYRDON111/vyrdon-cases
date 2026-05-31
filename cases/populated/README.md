@@ -11,7 +11,7 @@ Fully populated, anonymized case studies that exercise the four-pillar law (ROOT
 2. Surface signal
 3. Root failure
 4. Missing safeguard
-5. VYRDON Root map        (with math + bad-code + missing-code + right-code)
+5. VYRDON Root map        (math + bad-code + missing-code + right-code subsections required for doctrine-form cases without a Detailed Case Record; optional for cases that carry a Detailed Case Record)
 6. Decision               (PASS / HOLD / NO_PASS)
 7. Output packet
 8. System boundary        (what VYRDON does NOT claim)

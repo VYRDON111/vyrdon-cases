@@ -211,7 +211,7 @@ enforcement_type: payout_block
 next_action_1: reissue_payout_with_correct_account_suffix
 next_action_2: notify_merchant_with_full_audit_trail
 next_action_3: open_engineering_ticket_account_number_truncation
-secondary_action: flag_routing_destination_match for_compliance_review
+secondary_action: flag_routing_destination_match_for_compliance_review
 anomaly_recorded: YES
 circuit_breaker_check: anomaly_count incremented (current: 6/10 threshold)
 escalation_trigger: third unreconciled return in 30 days will trip the breaker
