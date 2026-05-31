@@ -112,10 +112,11 @@ Field mapping between the two forms (when both are present):
 | `VALID = TRUE` | `evidence_valid = TRUE` | Identical |
 | `VALID = FALSE` | `evidence_valid = FALSE` | Identical |
 | `VALID = MIXED` | `evidence_valid = FALSE` | MIXED means not fully TRUE, so fails the binary pass/fail check |
+| `VALID = MISSING` (legacy CASE-002 only) | `evidence_valid = MISSING` (legacy CASE-002 only) | Legacy transaction-decision form used a ternary `evidence_valid` marker for the recipient-credit-not-yet-received state. New cases (CASE-004 onward) collapse MISSING into `evidence_valid = FALSE` per the binary rule below. |
 | `CERTIFIED = TRUE` / `FALSE` / `N/A` | `certified_valid = TRUE` / `FALSE` / `FALSE` | `N/A` collapses to FALSE in the binary check |
 | `Contradiction = TRUE` / `FALSE` | `contradiction = TRUE` / `FALSE` | Identical |
 
-The 9-section form is richer (three states + N/A); the Detailed Case Record's RootPass Decision is binary by construction. Information is lost when collapsing 9-section → Detailed but never the other way.
+The 9-section form is richer (three states + N/A). The Detailed Case Record's RootPass Decision is binary by construction in CASE-004 onward. **Legacy exception:** CASE-002 (authored before the binary rule was finalized) retains a ternary `evidence_valid = MISSING` marker for one row; new cases do not. The discrepancy is preserved as a doctrinal record of how the form tightened; it is filable as a [case challenge](https://github.com/VYRDON111/vyrdon-open-review/blob/initial-build/.github/ISSUE_TEMPLATE/case-challenge.yml) if a reviewer believes CASE-002 should be migrated. Information is lost when collapsing 9-section → Detailed but never the other way.
 
 The math and code blocks in section 5 must be defensive governance logic only:
 - The "What systems do today (insufficient)" block shows the gap, not the attack
