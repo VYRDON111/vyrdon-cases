@@ -18,28 +18,30 @@ All cases authored from CASE-004 onward use the **9-section doctrine form**. Use
 8. **System Boundary** — what this case does and does not claim
 9. **Audit Note** — what an external auditor should look at first
 
-Reference: `cases/populated/CASE-004-PASS.md` through `cases/populated/CASE-010-NO_PASS.md` (skip CASE-001 to CASE-003 — those use the older 8-step form).
+Reference: `cases/populated/CASE-004-PASS.md` through `cases/populated/CASE-010-NO_PASS.md` (skip CASE-001 to CASE-003 — those use the older 10-section transaction-record form).
 
 A **Detailed Case Record** (transaction-decision form, binary fields) may be appended to a 9-section case when there is a specific anonymized scenario with concrete provided/missing evidence. Doctrine-form cases (CASE-007 to CASE-010) use the 9-section form alone. Field mapping rules are in `cases/populated/README.md` ("Field mapping between the two forms").
 
 ---
 
-## Legacy form: 8-step transaction record (CASE-001 to CASE-003 only)
+## Legacy form: 10-section transaction record (CASE-001 to CASE-003 only)
 
-The first three cases (CASE-001 / CASE-002 / CASE-003) were authored under an older 8-step structure and are kept in that form for historical traceability. Do not use this form for new cases.
+The first three cases (CASE-001 / CASE-002 / CASE-003) were authored under an older 10-section transaction-record structure and are kept in that form for historical traceability. Do not use this form for new cases.
 
-1. **Public record** — facts from public sources
-2. **Claimed state** — what verification state is being claimed
-3. **Required root** — what roots are needed to evaluate
-4. **Contradictions** — conflicts found in the evidence
-5. **RootPass decision** — PASS, NO_PASS, or HOLD with reasoning
-6. **Enforcement simulation** — what would happen if the decision were enforced
-7. **Sources** — all sources used
-8. **Disclaimer** — scope and limitations
+1. **Scenario** — the operational scenario being evaluated
+2. **Visible Claim** — what the surface state is claiming
+3. **Required Root** — which roots must be TRUE for the claim to PASS
+4. **Provided Evidence** — evidence the actor offered to support the claim
+5. **Missing Evidence** — required evidence that was not produced
+6. **Contradiction Check** — contradictions detected across the evidence set
+7. **RootPass Decision** — verdict (PASS / HOLD / NO_PASS) with reasoning
+8. **Enforcement Result** — what the gate would do if the decision were enforced
+9. **Institution Relevance** — which institutional class this case applies to
+10. **Redaction Note** — which fields are anonymized and to what degree
 
-The 8-step form maps onto the 9-section form (Public record ⊂ Surface Signal, Claimed state ⊂ Surface Signal, Required root ⊂ Root Failure + Root Map, Contradictions ⊂ Root Map row, RootPass decision ≡ Decision, Enforcement simulation ⊂ Output Packet, Sources / Disclaimer ⊂ System Boundary + Audit Note). A future migration may rewrite CASE-001 to CASE-003 into the 9-section form; until then, both forms coexist.
+The 10-section form maps onto the 9-section form: Scenario + Visible Claim ⊂ Surface Signal; Required Root + Missing Evidence ⊂ Root Failure + Root Map; Provided Evidence ⊂ Root Map; Contradiction Check ⊂ Root Map (Contradiction row); RootPass Decision ≡ Decision; Enforcement Result ⊂ Output Packet; Institution Relevance + Redaction Note ⊂ System Boundary + Audit Note. A future migration may rewrite CASE-001 to CASE-003 into the 9-section form; until then, both forms coexist.
 
-See `vyrdon-rootpass-proof/cases/live-court/case-template/` for the original 8-step template, kept for reference.
+A **separate 8-step template** lives in `vyrdon-rootpass-proof/cases/live-court/case-template/` (Public record / Claimed state / Required root / Contradictions / RootPass decision / Enforcement simulation / Sources / Disclaimer). That template is **not** what CASE-001 to CASE-003 use — it is an older live-court scaffold kept in the proof repo for reference and is not authoritative for this repo's populated cases.
 
 ---
 
@@ -48,8 +50,28 @@ See `vyrdon-rootpass-proof/cases/live-court/case-template/` for the original 8-s
 | Situation | Form |
 |---|---|
 | Any new case | 9-section doctrine form |
-| Editing CASE-001 to CASE-003 | Stay in 8-step until a deliberate migration commit |
+| Editing CASE-001 to CASE-003 | Stay in 10-section transaction-record form until a deliberate migration commit |
 | Doctrine case with no specific transaction | 9-section only (no Detailed Case Record) |
 | Anonymized transaction case with concrete fields | 9-section + Detailed Case Record |
 
 If you are unsure, default to the 9-section doctrine form.
+
+---
+
+## Decision code selection (primary-finding rule)
+
+A case may have both `ROOT = FALSE` and `Contradiction = TRUE`. In that case, `DECISION_CODE` is chosen by the **primary doctrinal finding** — the failure that the case turns on — not by which line you read first.
+
+| Primary finding | Decision code |
+|---|---|
+| Missing required root (one or more roots are MISSING) | `DEC-HOLD-MISSING_ROOT` |
+| Fabricated, substituted, or otherwise FALSE root (the gate is being asked to PASS on an invalid root) | `DEC-NOPASS-FALSE_ROOT` |
+| Contradiction between two custody-sealed sources (the gate cannot pick a winner; both seals are intact, the values disagree) | `DEC-NOPASS-CONTRADICTION` |
+
+Worked examples in the populated set:
+
+- **CASE-005** — both False Root (truncated account number) and Contradiction (platform ledger COMPLETED vs. originating bank RETURNED). The case turns on the contradiction between two custody-sealed sources, so `DEC-NOPASS-CONTRADICTION` is used.
+- **CASE-008** — both False Root (fabricated authority — token re-use treated as new human seal) and Contradiction (machine green TRUE vs. human red seal FALSE for the second transfer). The case turns on the fabricated authority, so `DEC-NOPASS-FALSE_ROOT` is used.
+- **CASE-010** — both False Root (damage-definition-match FALSE) and Contradiction (portal status contradicts policy-trigger match). The case turns on the policy-mismatch False Root, so `DEC-NOPASS-FALSE_ROOT` is used.
+
+The §6 reasoning paragraph in each case names the primary finding explicitly, so a reviewer can verify the decision-code choice without inferring intent.
