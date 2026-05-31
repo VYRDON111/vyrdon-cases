@@ -81,12 +81,12 @@ Contradiction = FALSE  (on-chain movement is uncontested; the gap is sealing, no
 RecoveryProof
   = WalletLossTrace
   × OwnershipBinding
+  × PreLossControlVerification
   × TheftCausation
-  × PropertyRecognition
   × AdmissibleArtifact
 
-If OwnershipBinding = 0 or TheftCausation = 0 or AdmissibleArtifact = 0,
-then RecoveryProof = 0.
+If OwnershipBinding = 0 or PreLossControlVerification = 0 or TheftCausation = 0
+or AdmissibleArtifact = 0, then RecoveryProof = 0.
 ```
 
 ### Code
