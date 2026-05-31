@@ -97,3 +97,16 @@ The math and code blocks in section 5 must be defensive governance logic only:
 No exploit steps, no malware instructions, no bypass workflow under any circumstances.
 
 See `vyrdon-portfolio/docs/AUDIT_READINESS.md` for the cross-repo maturity matrix that records each populated case.
+
+---
+
+## Public review
+
+Each populated case is open to public challenge through the review console.
+
+- Case review guide: [`vyrdon-open-review/review/CASE_REVIEW_GUIDE.md`](https://github.com/VYRDON111/vyrdon-open-review/blob/initial-build/review/CASE_REVIEW_GUIDE.md)
+- Case-challenge issue template: [`vyrdon-open-review/.github/ISSUE_TEMPLATE/case-challenge.yml`](https://github.com/VYRDON111/vyrdon-open-review/blob/initial-build/.github/ISSUE_TEMPLATE/case-challenge.yml)
+- Counterexample issue template: [`vyrdon-open-review/.github/ISSUE_TEMPLATE/counterexample.yml`](https://github.com/VYRDON111/vyrdon-open-review/blob/initial-build/.github/ISSUE_TEMPLATE/counterexample.yml)
+- Per-case honest limits: [`vyrdon-open-review/review/CASE_LIMITATIONS.md`](https://github.com/VYRDON111/vyrdon-open-review/blob/initial-build/review/CASE_LIMITATIONS.md)
+
+These cases are review artifacts, not official legal/financial determinations. CASE-007 through CASE-010 are doctrine forms of well-documented failure classes; they cite no specific incident and name no specific real party. Counterexamples are welcome and may be submitted via the counterexample issue template.
