@@ -185,8 +185,8 @@ This is a critical contradiction. Two independent evidence sources — the merch
 ## RootPass Decision
 
 ```
-root_valid       = TRUE   (sender debit and transmission proofs exist)
-gate_valid       = TRUE   (sanctions and purpose checks passed)
+root_valid       = FALSE  (routing/account match is False; account number was truncated, so the ROOT chain is broken at the routing pillar)
+gate_valid       = FALSE  (the gate accepted platform-ledger COMPLETED without consuming the originating bank's return file)
 evidence_valid   = FALSE  (routing/account mismatch + beneficiary credit absent)
 certified_valid  = FALSE  (originating bank return contradicts platform status)
 contradiction    = TRUE   (platform status contradicts originating bank return file)

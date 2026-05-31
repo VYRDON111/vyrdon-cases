@@ -1,6 +1,10 @@
 # Populated Cases
 
-Fully populated, anonymized case studies that exercise the four-pillar law (ROOT / GATE / VALID / CERTIFIED) on realistic transaction and proof scenarios. Every case in this directory uses the **9-section Root Language structure** defined in `vyrdon-methodology/docs/ROOT_LANGUAGE.md`:
+Fully populated, anonymized case studies that exercise the four-pillar law (ROOT / GATE / VALID / CERTIFIED) on realistic transaction and proof scenarios.
+
+**Two case formats coexist in this directory.** The current canonical format is the **9-section Root Language structure** defined in `vyrdon-methodology/docs/ROOT_LANGUAGE.md`. Earlier cases use an older transaction-decision format that predates the Root Language refactor.
+
+9-section Root Language structure (canonical):
 
 ```
 1. Case title
@@ -13,6 +17,12 @@ Fully populated, anonymized case studies that exercise the four-pillar law (ROOT
 8. System boundary        (what VYRDON does NOT claim)
 9. Audit note             (what would strengthen the review)
 ```
+
+| Case | Format | Notes |
+|---|---|---|
+| CASE-001 to CASE-003 | older transaction-decision format | Scenario / Visible Claim / Required Root / Provided Evidence / Missing Evidence / Contradiction Check / RootPass Decision / Enforcement Result / Institution Relevance / Redaction Note. Kept as-is; will be migrated to 9-section in a future PR. |
+| CASE-004 to CASE-006 | 9-section Root Language structure **plus** a Detailed Case Record (transaction-decision form) | Both forms are present so reviewers can see the same case in both vocabularies. The Detailed Case Record's `root_valid` / `gate_valid` fields must agree with §5's `ROOT` / `GATE` evaluations. |
+| CASE-007 to CASE-010 | 9-section Root Language structure (no Detailed Case Record) | These are doctrine forms of well-documented failure classes — the input fields needed to populate a Detailed Case Record (specific transaction IDs, dollar amounts, ledger lines) are not specified, by design. The 9-section summary is sufficient because §5 already names the failed pillars and §6 names the verdict. |
 
 These are **not legal opinions** and **not accusations**. They are illustrations of how the doctrine produces PASS / HOLD / NO_PASS under realistic but anonymized inputs. The redaction note in each case spells out which fields are sanitized. The math and code blocks in each Root map are **defensive governance logic only** — no exploit steps, no malware instructions, no bypass workflow.
 
@@ -88,6 +98,8 @@ The cases in this directory are the **surface-seal exercise**. They establish th
 ## Authoring style
 
 If you add a new populated case, follow the 9-section structure exactly. Cases that omit a section, mix in weak language (see the forbidden list in `vyrdon-methodology/docs/ROOT_LANGUAGE.md` §6), or relabel verdicts to fit a desired outcome do not belong in this directory.
+
+A Detailed Case Record (transaction-decision form) is **optional**. Include it only when the case has a specific anonymized scenario with concrete provided/missing evidence that the transaction-decision form can render. Doctrine-form cases (cases that name a failure class without binding to specific anonymized fields) use the 9-section summary alone. When a Detailed Case Record is present, its `root_valid` and `gate_valid` fields must agree with §5's `ROOT` and `GATE` evaluations; a divergence is a doctrine inconsistency and must be repaired before merge.
 
 The math and code blocks in section 5 must be defensive governance logic only:
 - The "What systems do today (insufficient)" block shows the gap, not the attack

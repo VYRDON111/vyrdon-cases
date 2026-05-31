@@ -199,8 +199,8 @@ The gate cannot determine which signed statement is accurate. Both are internall
 ## RootPass Decision
 
 ```
-root_valid       = TRUE   (payment, provisioning, customer affidavit, merchant response all present)
-gate_valid       = TRUE   (procedural gates met — dispute filed within network window)
+root_valid       = FALSE  (identity_consistency is contradicted by geography mismatch, so the ROOT chain is broken at the identity-anchor pillar; payment/provisioning fields being present is necessary but not sufficient)
+gate_valid       = FALSE  (the gate cannot pass a finality decision over contradicted evidence; procedural admission of the dispute is not a finality gate)
 evidence_valid   = FALSE  (service_usage_evidence and identity_consistency contradicted)
 certified_valid  = FALSE  (no independently certified record resolves the contradiction)
 contradiction    = TRUE   (two contradictions detected, neither resolvable from current evidence)
