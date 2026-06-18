@@ -112,10 +112,11 @@ Field mapping between the two forms (when both are present):
 | `VALID = TRUE` | `evidence_valid = TRUE` | Identical |
 | `VALID = FALSE` | `evidence_valid = FALSE` | Identical |
 | `VALID = MIXED` | `evidence_valid = FALSE` | MIXED means not fully TRUE, so fails the binary pass/fail check |
+| `VALID = MISSING` *(hypothetical — CASE-002 has no 9-section §5; row shown for completeness only)* | `evidence_valid = MISSING` (actual; CASE-002 line 84) | CASE-002 is entirely in the older 10-section transaction-decision form and does not carry a 9-section §5 Root Map. The left column is hypothetical: it is what the 9-section state **would** be if CASE-002 were migrated. The right column is the actual ternary `evidence_valid = MISSING` marker that exists today. New cases (CASE-004 onward) do not use this marker; they collapse MISSING into `evidence_valid = FALSE` per the binary rule. |
 | `CERTIFIED = TRUE` / `FALSE` / `N/A` | `certified_valid = TRUE` / `FALSE` / `FALSE` | `N/A` collapses to FALSE in the binary check |
 | `Contradiction = TRUE` / `FALSE` | `contradiction = TRUE` / `FALSE` | Identical |
 
-The 9-section form is richer (three states + N/A); the Detailed Case Record's RootPass Decision is binary by construction. Information is lost when collapsing 9-section → Detailed but never the other way.
+The 9-section form is richer (three states + N/A). The Detailed Case Record's RootPass Decision is binary by construction in CASE-004 onward. **Legacy exception:** CASE-002 (authored before the binary rule was finalized) retains a ternary `evidence_valid = MISSING` marker for one row; new cases do not. The discrepancy is preserved as a doctrinal record of how the form tightened; it is filable as a [case challenge](https://github.com/VYRDON111/vyrdon-open-review/blob/initial-build/.github/ISSUE_TEMPLATE/case-challenge.yml) if a reviewer believes CASE-002 should be migrated. Information is lost when collapsing 9-section → Detailed but never the other way.
 
 The math and code blocks in section 5 must be defensive governance logic only:
 - The "What systems do today (insufficient)" block shows the gap, not the attack

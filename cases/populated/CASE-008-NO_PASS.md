@@ -120,6 +120,9 @@ def require_human_reconfirmation_for_next_transfer():
 
 def verify_new_beneficiary_before_release():
     pass
+
+def gate_must_distinguish_token_possession_from_authority():
+    pass
 ```
 
 ```python
